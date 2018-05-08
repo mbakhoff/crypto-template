@@ -1,7 +1,7 @@
 # Crypto basics
 
 Cryptographic algorithms enable protection of sensitive data.
-Different algorithms provide different security attributes:
+Different algorithms provide different security properties:
 
 * confidentiality - unauthorized parties cannot access the data
 * integrity - unauthorized parties cannot modify the data undetected
@@ -162,7 +162,7 @@ On the sender side:
 * send the file, the HMAC and the PBKDF2 parameters (salt, iterations)
 
 On the receiver side:
-* calculate the key using the password and PBKDF2 parameters
+* calculate the key using the PBKDF2 parameters from the sender
 * calculate the HMAC from the file
 * check that the HMAC matches
 
@@ -240,7 +240,7 @@ byte[] data = cipher.doFinal(encrypted);
 ```
 
 Note that AES is not the only cipher and GCM is not the only mode.
-Other ciphers and nodes have different security properties.
+Other ciphers and modes have different security properties.
 Cryptography is a minefield.
 Don't try to build your own cipher and consult with an expert when choosing a new cipher for your project.
 
