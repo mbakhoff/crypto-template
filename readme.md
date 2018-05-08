@@ -116,9 +116,9 @@ byte[] salt = new byte[32];
 rng.nextBytes(salt);
 
 // output length of SHA-256
-int outputLengthBytes = 32;
+int outputLengthBits = 256;
 
-PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterationCount, outputLengthBytes);
+PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterationCount, outputLengthBits);
 byte[] key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
 ```
 
