@@ -98,7 +98,7 @@ Steps for using PBKDF2 for password hashing:
 1. choose an iteration count
 2. generate a random salt for the password (don't reuse the salt for different passwords)
 3. calculate the key using PBKDF2
-4. store the user id, key, salt and iteration count in a file/database
+4. store the user id, key, **salt and iteration count** in a file/database
 
 ```
 import javax.crypto.SecretKeyFactory;
@@ -129,6 +129,7 @@ Steps for verifying the password at login:
 
 Note that the salt is not a secret.
 Its only purpose is to make building rainbow tables more difficult.
+The salt and iteration count should always be stored along the key.
 
 ## HMAC
 
@@ -252,13 +253,13 @@ This is used for digital signatures, setting up HTTPS connections etc.
 
 ## Tasks
 
-1. Have a classmate calculate the hash of a random number from 1-1000 and give you the hash.
+1. Have a classmate calculate the hash of a random number from 1-1000 and give you the hex-encoded hash.
    Write a program that finds the number given its hash (use brute force).
 2. Pick a random password and hash it with `PBKDF2WithHmacSHA256`.
    Find the iteration count that takes ~500ms on your machine.
 3. Write a program that takes two file names as command line arguments.
    The program should calculate the HMAC of the first file using the key in the second file and output the hex encoded result.
    Generate a file that contains 32 random bytes (for using as a key) and test the program.
-4. Write a program that takes a mode string ("encrypt" or "decrypt"), a filename and a password as command line arguments.
-   The program should encrypt or decrypt the given file depending on the specified mode.
+4. Write a program that takes a mode string ("encrypt" or "decrypt"), two filenames (input and output) and a password as command line arguments.
+   The program should encrypt or decrypt the input file depending on the specified mode.
    Generate the key from the password using PBKDF2, store the salt, iterations and IV with the encrypted data (in the beginning or end of the file).

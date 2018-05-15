@@ -6,6 +6,8 @@ public class SafeIterationCount {
     // Pick a random password and hash it with PBKDF2WithHmacSHA256.
     // Find the iteration count that takes ~500ms on your machine.
 
+    // Hint: System.currentTimeMillis()
+
     // TODO implement
   }
 }
