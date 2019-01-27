@@ -231,7 +231,7 @@ byte[] encrypted;
 
 // the key and iv that were used for encryption
 byte[] key;
-byte iv[];
+byte[] iv;
 
 Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
 cipher.init(Cipher.DECRYPT_MODE,
