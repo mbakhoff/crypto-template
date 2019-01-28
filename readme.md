@@ -215,8 +215,9 @@ byte[] encrypted = cipher.doFinal(data);
 
 Some notes:
 * The initialization vector (IV) is some random bytes.
-  It is critical that an unique IV is generated for each encrypted file.
+  It is critical that an unique IV is generated each time a key is used.
   Using an unique IV ensures that encrypting the sama data results in a different output each time.
+  Reusing an IV will open different possitilities for attacks, including compromising the key.
   The value of the IV is not a secret and it is needed later to decrypt the data.
 * The recommended key size for AES is 256-bit (32 bytes).
   The encryption is as strong as the key.
