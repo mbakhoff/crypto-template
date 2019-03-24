@@ -149,7 +149,7 @@ Note that the salt and iteration count are not secret and can be stored in plain
 
 ## Encryption
 
-Often it's also useful to encrypt data, i.e. make it unreadable to anyone who doesn't have the right key.
+Sometimes it's useful to encrypt data, i.e. make it unreadable to anyone who doesn't have the right key.
 Encryption can be used for both transferring data or for long term storage on the disk.
 
 A good encryption algorithm has the following properties:
@@ -159,7 +159,7 @@ A good encryption algorithm has the following properties:
   comparing different encrypted files should not reveal their content.
 
 The exact process of encrypting a file depends on the encryption algorithm (the cipher).
-The samples here will be using the **AES** cipher in GCM mode.
+The samples here will be using the **AES** cipher in [GCM mode](https://crypto.stackexchange.com/questions/17999/aes256-gcm-can-someone-explain-how-to-use-it-securely-ruby).
 
 Encrypting a file in Java:
 ```
@@ -221,7 +221,7 @@ Other ciphers and modes have different security properties.
 
 ## Asymmetric crypto
 
-The encryption we used above used the same key to encrypt and decrypt the data.
+The encryption we used above used the same key to both encrypt and decrypt the data (symmetric key encryption).
 That's a very fast, secure and efficient tool, but it assumes that there is a shared password / encryption key available.
 
 Asymmetric crypto uses a different approach.
@@ -235,12 +235,20 @@ To send an encrypted message to someone, ask them for their public key and encry
 Send the cipher text to the key owner.
 Only they can decrypt the data because only they have the private key.
 
+Often hybrid encryption is used: the file is encrypted with symmetric encryption and only the symmetric key is encrypted with the recipient's public key.
+
 ### Data signing
 
-To create a digital signature, encrypt the data with your private key.
+To create a digital signature, encrypt the data (or just its hash) with your private key.
 Send the cipher text and your public key to the recipient.
 They can decrypt the data using your public key, therefore it must have been encrypted by your private key.
 Only you have the private key, therefore it must be your document.
+
+### ID-cards
+
+The chip on Estionian ID cards hold [two asymmetric key pairs](https://www.id.ee/index.php?id=30228).
+The first (PIN1) is used to for authentication and data decryption.
+The second (PIN2) is used for digital signatures.
 
 ### TLS
 
@@ -279,7 +287,7 @@ KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefau
 kmf.init(store, storePass.toCharArray());
 KeyManager[] keyManagers = kmf.getKeyManagers();
 
-SSLContext ctx = SSLContext.getInstance("TLSv1.3");
+SSLContext ctx = SSLContext.getInstance("TLS");
 ctx.init(keyManagers, null, null);
 try (ServerSocket serverSocket = ctx.getServerSocketFactory().createServerSocket(8443)) {
   // use like a regular server socket
