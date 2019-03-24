@@ -1,6 +1,6 @@
-package task4;
+package task5;
 
-public class Encryptor {
+public class EncryptionApp {
 
   public static void main(String[] args) throws Exception {
     // Write a program that takes a mode string ("encrypt" or "decrypt"),
@@ -10,7 +10,8 @@ public class Encryptor {
     // password using PBKDF2, store the salt, iterations and IV with
     // the encrypted data (in the beginning or end of the file).
 
-    // TODO implement
-    // Hint: use DataInputStream#readFully to read the stored salt and IV
+    // Hint: use InputStream#readNBytes to read the stored salt and IV
+
+    // TODO: implement
   }
 }
