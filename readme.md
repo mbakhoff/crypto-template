@@ -114,7 +114,7 @@ PBKDF2 works by combining the password with a random string (**salt**) and apply
 Increasing the iteration count makes the function slower and more expensive to break with brute force.
 
 Using the salt makes it possible to generate multiple encryption keys from a single password (new salt = new key).
-Salt also helps to avoid [rainbow table attacks](https://en.wikipedia.org/wiki/Rainbow_table).
+Salt also helps to avoid [rainbow table attacks](https://learncryptography.com/hash-functions/rainbow-tables).
 
 Generating an encryption key using PBKDF2:
 1. choose an iteration count
